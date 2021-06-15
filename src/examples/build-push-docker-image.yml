@@ -11,4 +11,3 @@ usage:
         - custom-orb/build-push-docker-image:
             executor: aws-ecr/default
             repo-name: <<parameters.repo-name>>
-  
