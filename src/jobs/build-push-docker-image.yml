@@ -11,7 +11,7 @@ steps:
   - aws-cli/setup:
       configure-default-region: true
       configure-profile-region: true
-  - custom-orb/aws-assume-role
+  - aws-assume-role
   - aws-ecr/build-image:
       repo: <<parameters.repo-name>>
       tag: latest,${CIRCLE_SHA1}
