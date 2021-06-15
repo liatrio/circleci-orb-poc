@@ -1,3 +1,51 @@
-executor: gradle-executor
+description: |
+  Checkout, build and test a Gradle project.
+executor: << parameters.executor >>
+parameters:
+  app_src_directory:
+    default: ''
+    description: >-
+      Useful when the source of your maven project is not in the root directory
+      of your git repo. Supply the name of the directory or relative path of the
+      directory containing your source code.
+    type: string
+  cache_checksum_file:
+    default: build.gradle
+    description: >-
+      File to use to generate the cache checksum, defaults to build.gradle.  For
+      example if using Gradle Kotlin DSL then set to build.gradle.kts instead.
+    type: string
+  cache_key:
+    default: v1
+    description: >-
+      Add a custom suffix to your cache key in the event you need to work with
+      multiple maven caches.
+    type: string
+  executor:
+    default: default
+    description: The name of custom executor to use
+    type: executor
+  reports_path:
+    default: build/reports/
+    description: Artifacts to be published
+    type: string
+  test_command:
+    default: test
+    type: string
+  test_results_path:
+    default: build/test-results/
+    description: Results to be published
+    type: string
 steps:
-  - cache_checksum_file: build.gradle.kts
+  - checkout
+  - with_cache:
+      steps:
+        - run:
+            cache_checksum_file: << parameters.cache_checksum_file >>
+            cache_key: << parameters.cache_key >>
+            command: ./gradlew << parameters.test_command >>
+            name: Run Tests
+            working_directory: << parameters.app_src_directory >>
+  - collect_test_results:
+      reports_path: <<parameters.reports_path>>
+      test_results_path: <<parameters.test_results_path>>
