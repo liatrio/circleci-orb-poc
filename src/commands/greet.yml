@@ -7,7 +7,7 @@ parameters:
     type: string
     default: "World"
     description: "Hello to whom?"
-steps: 
+steps:
   - run:
       environment:
         PARAM_TO: <<parameters.to>>
