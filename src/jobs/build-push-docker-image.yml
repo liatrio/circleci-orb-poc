@@ -1,9 +1,9 @@
 executor: <<parameter.executor>>
 parameters:
-  repo-name: 
+  repo-name:
     type: string
     default: AWS_REPO
-  executor: 
+  executor:
     type: executor
     default: aws-ecr/default
 steps:
