@@ -5,7 +5,7 @@ parameters:
     default: AWS_REPO
   executor:
     type: executor
-    default: aws-ecr/default
+    default: default
 steps:
   - checkout
   - aws-cli/setup:
