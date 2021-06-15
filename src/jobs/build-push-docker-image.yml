@@ -1,8 +1,8 @@
 executor: <<parameters.executor>>
 parameters:
   repo-name:
-    type: env_var_name
-    default: AWS_REPO
+    type: string
+    default: calvin
   executor:
     type: executor
     default: default
