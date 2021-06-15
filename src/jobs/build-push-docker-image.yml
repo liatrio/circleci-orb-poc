@@ -1,4 +1,4 @@
-executor: <<parameter.executor>>
+executor: <<parameters.executor>>
 parameters:
   repo-name:
     type: string
