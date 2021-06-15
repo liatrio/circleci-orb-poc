@@ -2,7 +2,7 @@ executor: <<parameters.executor>>
 parameters:
   repo-name:
     type: string
-    default: calvin
+    default: ""
   executor:
     type: executor
     default: default
