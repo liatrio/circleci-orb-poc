@@ -1,0 +1,20 @@
+executor: <<parameter.executor>>
+parameters:
+  repo-name: 
+    type: string
+    default: AWS_REPO
+  executor: 
+    type: string
+    default: aws-ecr/default
+steps:
+  - checkout
+  - aws-cli/setup:
+      configure-default-region: true
+      configure-profile-region: true
+  - custom-orb/aws-assume-role
+  - aws-ecr/build-image:
+      repo: <<parameters.repo-name>>
+      tag: latest,${CIRCLE_SHA1}
+  - aws-ecr/push-image:
+      repo: <<parameters.repo-name>>
+      tag: latest,${CIRCLE_SHA1}
