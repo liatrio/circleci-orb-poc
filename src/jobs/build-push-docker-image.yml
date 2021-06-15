@@ -4,7 +4,7 @@ parameters:
     type: string
     default: AWS_REPO
   executor: 
-    type: string
+    type: executor
     default: aws-ecr/default
 steps:
   - checkout
