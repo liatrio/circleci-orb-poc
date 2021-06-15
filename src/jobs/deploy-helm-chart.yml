@@ -1,13 +1,11 @@
 executor: <<parameters.executor>>
 parameters:
   app-name:
-    default: spring-boot-kotlin
     type: string
   role-arn:
     default: AWS_ASSUME_ROLE
     type: string
   cluster-name:
-    default: circleci-pipeline-poc
     type: string
   executor:
     type: executor

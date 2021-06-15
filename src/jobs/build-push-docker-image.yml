@@ -2,7 +2,6 @@ executor: <<parameters.executor>>
 parameters:
   repo-name:
     type: string
-    default: "${AWS_REPO}"
   executor:
     type: executor
     default: default
