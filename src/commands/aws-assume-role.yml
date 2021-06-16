@@ -1,3 +1,5 @@
+description: |
+  Utilizes a set of temporary security credentials that you can use to access AWS resources that you might not normally have access to.
 parameters:
   account-url:
     default: AWS_ECR_ACCOUNT_URL

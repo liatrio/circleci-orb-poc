@@ -1,3 +1,5 @@
+description: |
+  Build and push a docker image to ECR.
 executor: <<parameters.executor>>
 parameters:
   repo-name:

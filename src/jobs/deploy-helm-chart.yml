@@ -1,3 +1,5 @@
+description: |
+  Deploy helm chart to EKS.
 executor: <<parameters.executor>>
 parameters:
   app-name:
