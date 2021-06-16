@@ -8,7 +8,7 @@ usage:
   workflows:
     build:
       - liatrio-orb/gradle-test:
-          executor: custom-orb/gradle-executor 
+          executor: custom-orb/gradle-executor
           cache_checksum_file: build.gradle.kts
           reports_path: build/reports/
-          test_results_path: build/test-results/ 
+          test_results_path: build/test-results/
