@@ -2,9 +2,11 @@ executor: <<parameters.executor>>
 parameters:
   repo-name:
     type: string
+    description: Name of an Amazon ECR repository
   executor:
     type: executor
     default: default
+    description: The name of a custom executor to use
 steps:
   - checkout
   - aws-cli/setup:
