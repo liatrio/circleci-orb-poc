@@ -1,0 +1,15 @@
+description: >
+  Checkout, build and test a Gradle project.
+
+usage:
+  version: 2.1
+  orbs:
+    liatrio-orb: liatrio-poc/circleci-orb-poc@0.0.5
+  workflows:
+    build:
+      jobs:
+        - liatrio-orb/gradle-test:
+            executor: custom-orb/gradle-executor
+            cache_checksum_file: build.gradle.kts
+            reports_path: build/reports/
+            test_results_path: build/test-results/
