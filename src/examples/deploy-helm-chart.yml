@@ -7,6 +7,7 @@ usage:
     liatrio-orb: liatrio-poc/circleci-orb-poc@0.0.5
   workflows:
     build:
-      - liatrio-orb/deploy-helm-chart:
-          app-name: my-app
-          cluster-name: my-cluster
+      jobs:
+        - liatrio-orb/deploy-helm-chart:
+            app-name: my-app
+            cluster-name: my-cluster
