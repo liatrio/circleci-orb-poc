@@ -1,13 +1,13 @@
 description: >
-  Build and push docker image to ECR test
+  Build and push docker image to ECR.
 
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    liatrio-orb: liatrio-poc/circleci-orb-poc@0.0.5
   workflows:
     pipeline_name:
       jobs:
         - custom-orb/build-push-docker-image:
             executor: aws-ecr/default
-            repo-name: <<parameters.repo-name>>
+            repo-name: my-repo

@@ -1,0 +1,12 @@
+description: >
+  Update kube-config, install helm, and deploy to Kubernetes EKS.
+
+usage:
+  version: 2.1
+  orbs:
+    liatrio-orb: liatrio-poc/circleci-orb-poc@0.0.5
+  workflows:
+    build:
+      - liatrio-orb/deploy-helm-chart:
+          app-name: my-app
+          cluster-name: my-cluster
