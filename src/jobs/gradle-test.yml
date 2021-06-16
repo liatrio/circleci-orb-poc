@@ -23,19 +23,20 @@ parameters:
     type: string
   executor:
     default: default
-    description: The name of custom executor to use
     type: executor
+    description: The name of a custom executor to use
   reports_path:
     default: build/reports/
-    description: Artifacts to be published
     type: string
+    description: Artifacts to be published
   test_command:
     default: test
     type: string
+    description: Test command to run
   test_results_path:
     default: build/test-results/
-    description: Results to be published
     type: string
+    description: Results to be published
 steps:
   - checkout
   - with_cache:

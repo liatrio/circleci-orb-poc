@@ -2,15 +2,21 @@ parameters:
   account-url:
     default: AWS_ECR_ACCOUNT_URL
     type: env_var_name
+    description: >
+      Env var storing Amazon ECR account URL that maps to an AWS account,
+      e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com defaults to AWS_ECR_ACCOUNT_URL
   role-arn:
     default: AWS_ASSUME_ROLE
     type: env_var_name
+    description: The Amazon Resource Name (ARN) of the role to assume
   role-session-name:
     default: default
     type: string
+    description: An identifier for the assumed role session
   aws-region:
     default: AWS_DEFAULT_REGION
     type: env_var_name
+    description: Name of env var storing your AWS region information, defaults to AWS_REGION
 steps:
   - run:
       name: Assume Specified Role

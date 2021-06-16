@@ -6,3 +6,4 @@ parameters:
   tag:
     default: '8.0'
     type: string
+    description: Tag version

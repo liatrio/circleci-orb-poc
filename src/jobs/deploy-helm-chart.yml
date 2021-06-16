@@ -2,14 +2,18 @@ executor: <<parameters.executor>>
 parameters:
   app-name:
     type: string
+    description: Name of application being deployed to EKS
   role-arn:
     default: AWS_ASSUME_ROLE
     type: string
+    description: The Amazon Resource Name (ARN) of the role to assume
   cluster-name:
     type: string
+    description: EKS cluster name
   executor:
     type: executor
     default: default
+    description: The name of a custom executor to use
 steps:
   - checkout
   - aws-cli/setup:
