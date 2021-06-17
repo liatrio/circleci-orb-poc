@@ -4,10 +4,10 @@ description: >
 usage:
   version: 2.1
   orbs:
-    liatrio-orb: liatrio-poc/circleci-orb-poc@0.0.5
+    liatrio-orb: liatrio-poc/circleci-orb-poc@x.y.z
   workflows:
-    pipeline_name:
+    build:
       jobs:
-        - custom-orb/build-push-docker-image:
+        - liatrio-orb/build-push-docker-image:
             executor: aws-ecr/default
             repo-name: my-repo
