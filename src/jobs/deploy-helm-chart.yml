@@ -17,8 +17,7 @@ steps:
       configure-profile-region: true
   - aws-eks/install-aws-iam-authenticator
   - aws-assume-role
-  - run:
-      command: aws eks update-kubeconfig --name <<parameters.cluster-name>>
+  - run: aws eks update-kubeconfig --name <<parameters.cluster-name>>
   - helm/upgrade-helm-chart:
       helm-version: v3.0.0
       release-name: <<parameters.app-name>>
