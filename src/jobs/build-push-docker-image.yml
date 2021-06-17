@@ -15,6 +15,7 @@ steps:
       configure-default-region: true
       configure-profile-region: true
   - aws-assume-role
+  - ecr-login
   - aws-ecr/build-image:
       repo: <<parameters.repo-name>>
       tag: latest,${CIRCLE_SHA1}
