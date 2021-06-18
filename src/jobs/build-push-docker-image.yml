@@ -1,16 +1,21 @@
+description: |
+  Build and push a docker image to ECR.
 executor: <<parameters.executor>>
 parameters:
   repo-name:
     type: string
+    description: Name of an Amazon ECR repository
   executor:
     type: executor
     default: default
+    description: The name of a custom executor to use
 steps:
   - checkout
   - aws-cli/setup:
       configure-default-region: true
       configure-profile-region: true
   - aws-assume-role
+  - ecr-login
   - aws-ecr/build-image:
       repo: <<parameters.repo-name>>
       tag: latest,${CIRCLE_SHA1}

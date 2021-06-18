@@ -1,15 +1,21 @@
+description: |
+  Deploy helm chart to EKS.
 executor: <<parameters.executor>>
 parameters:
   app-name:
     type: string
+    description: Name of application being deployed to EKS
   role-arn:
     default: AWS_ASSUME_ROLE
     type: string
+    description: The Amazon Resource Name (ARN) of the role to assume
   cluster-name:
     type: string
+    description: EKS cluster name
   executor:
     type: executor
     default: default
+    description: The name of a custom executor to use
 steps:
   - checkout
   - aws-cli/setup:
@@ -17,15 +23,8 @@ steps:
       configure-profile-region: true
   - aws-eks/install-aws-iam-authenticator
   - aws-assume-role
-  - run:
-      command: |
-        aws eks update-kubeconfig --name <<parameters.cluster-name>>
-        curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-        chmod 700 kubectl
-        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-        chmod 700 get_helm.sh
-        ./get_helm.sh
-        helm upgrade <<parameters.app-name>> ./<<parameters.app-name>>
-        export POD_NAME=$(./kubectl get pods --namespace default -l "app.kubernetes.io/name=<<parameters.app-name>>,app.kubernetes.io/instance=<<parameters.app-name>>" -o jsonpath="{.items[0].metadata.name}")
-        echo $POD_NAME
-      name: Deploy to EKS
+  - run: aws eks update-kubeconfig --name <<parameters.cluster-name>>
+  - helm/upgrade-helm-chart:
+      helm-version: v3.0.0
+      release-name: <<parameters.app-name>>
+      chart: ./<<parameters.app-name>>
