@@ -11,6 +11,10 @@ parameters:
     description: The name of a custom executor to use
 steps:
   - checkout
+  - persist_to_workspace:
+      root: .
+      paths:
+        - .
   - aws-cli/setup
   - aws-assume-role
   - ecr-login

@@ -17,7 +17,8 @@ parameters:
     default: default
     description: The name of a custom executor to use
 steps:
-  - checkout
+  - attach_workspace:
+      at: .
   - aws-cli/setup
   - aws-eks/install-aws-iam-authenticator
   - aws-assume-role
