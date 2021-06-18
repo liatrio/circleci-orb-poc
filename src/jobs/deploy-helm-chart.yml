@@ -6,8 +6,8 @@ parameters:
     type: string
     description: Name of application being deployed to EKS
   role-arn:
-    default: AWS_ASSUME_ROLE
     type: string
+    default: AWS_ASSUME_ROLE
     description: The Amazon Resource Name (ARN) of the role to assume
   cluster-name:
     type: string
@@ -18,9 +18,7 @@ parameters:
     description: The name of a custom executor to use
 steps:
   - checkout
-  - aws-cli/setup:
-      configure-default-region: true
-      configure-profile-region: true
+  - aws-cli/setup
   - aws-eks/install-aws-iam-authenticator
   - aws-assume-role
   - run: aws eks update-kubeconfig --name <<parameters.cluster-name>>

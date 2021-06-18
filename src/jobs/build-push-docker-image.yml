@@ -11,9 +11,7 @@ parameters:
     description: The name of a custom executor to use
 steps:
   - checkout
-  - aws-cli/setup:
-      configure-default-region: true
-      configure-profile-region: true
+  - aws-cli/setup
   - aws-assume-role
   - ecr-login
   - aws-ecr/build-image:
