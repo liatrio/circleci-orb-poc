@@ -1,0 +1,11 @@
+description: |
+  Run npm install and build. Intended for Svelte applications
+steps:
+  - run:
+      name: Npm install
+      command: |
+        npm install
+  - run:
+      name: Npm build
+      command: |
+        npm run build

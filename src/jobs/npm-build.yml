@@ -1,0 +1,11 @@
+description: |
+  Run npm build
+executor: << parameters.executor >>
+parameters:
+  executor:
+    default: default
+    type: executor
+    description: The name of a custom executor to use
+steps:
+  - checkout
+  - npm-build
