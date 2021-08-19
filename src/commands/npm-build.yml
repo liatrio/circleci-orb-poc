@@ -9,7 +9,3 @@ steps:
       name: Npm build
       command: |
         npm run build
-  - run:
-      name: check environment
-      command: |
-        env

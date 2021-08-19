@@ -9,3 +9,4 @@ parameters:
 steps:
   - checkout
   - npm-build
+  - run-metrics

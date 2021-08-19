@@ -1,0 +1,7 @@
+description: |
+  Collect metrics from pipeline execution
+steps:
+  - run:
+      name: Gather pipeline info
+      when: always
+      command: <<include(scripts/metrics.sh)>>
