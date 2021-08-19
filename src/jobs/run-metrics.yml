@@ -1,5 +1,5 @@
 description: |
-  Run npm build
+  Gather metrics
 executor: << parameters.executor >>
 parameters:
   executor:
@@ -8,4 +8,4 @@ parameters:
     description: The name of a custom executor to use
 steps:
   - checkout
-  - npm-build
+  - run-metrics
