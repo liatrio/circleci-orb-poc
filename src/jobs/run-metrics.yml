@@ -6,6 +6,11 @@ parameters:
     default: default
     type: executor
     description: The name of a custom executor to use
+docker:
+  - image: 'cimg/node:lts'
 steps:
   - checkout
+  - aws-cli/setup
+  - aws-eks/install-aws-iam-authenticator
+  - aws-assume-role
   - run-metrics
