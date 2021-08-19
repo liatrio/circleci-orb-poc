@@ -16,16 +16,16 @@ Item=$(cat << EOF
   },
   "name": {
       "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .name)"
-  }
+  },
   "project_slug": {
       "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .project_slug)"
-  }
+  },
   "status": {
       "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .status)"
-  }
+  },
   "type": {
       "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .type)"
-  }
+  },
   "stopped_at": {
       "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .stopped_at)"
   }
