@@ -5,29 +5,29 @@ curl --request GET \
 jq_select='.items[] | select(.name | contains("deploy"))'
 Item=$(cat << EOF
 {
-  'job_number': {
-      'N': '$(cat jobs.json | jq -c "$jq_select" | jq -r .job_number)',
+  "job_number": {
+      "N": "$(cat jobs.json | jq -c "$jq_select" | jq -r .job_number)"
   },
-  'id': {
-      'S': '$(cat jobs.json | jq -c "$jq_select" | jq -r .id)',
+  "id": {
+      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .id)"
   },
-  'started_at': {
-      'S': '$(cat jobs.json | jq -c "$jq_select" | jq -r .started_at)',
+  "started_at": {
+      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .started_at)"
   },
-  'name': {
-      'S': '$(cat jobs.json | jq -c "$jq_select" | jq -r .name)'
+  "name": {
+      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .name)"
   }
-  'project_slug': {
-      'S': '$(cat jobs.json | jq -c "$jq_select" | jq -r .project_slug)'
+  "project_slug": {
+      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .project_slug)"
   }
-  'status': {
-      'S': '$(cat jobs.json | jq -c "$jq_select" | jq -r .status)'
+  "status": {
+      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .status)"
   }
-  'type': {
-      'S': '$(cat jobs.json | jq -c "$jq_select" | jq -r .type)'
+  "type": {
+      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .type)"
   }
-  'stopped_at': {
-      'S': '$(cat jobs.json | jq -c "$jq_select" | jq -r .stopped_at)'
+  "stopped_at": {
+      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .stopped_at)"
   }
 }
 EOF
