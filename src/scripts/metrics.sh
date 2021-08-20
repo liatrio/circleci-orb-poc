@@ -3,37 +3,60 @@ curl --request GET \
      --header "authorization: Basic $API_TOKEN" > jobs.json
 
 jq_select='.items[] | select(.name | contains("deploy"))'
+started_at=$(cat jobs.json | jq -c "$jq_select" | jq -r .started_at)
 Item=$(cat << EOF
-{
-  "job_number": {
-      "N": "$(cat jobs.json | jq -c "$jq_select" | jq -r .job_number)"
-  },
-  "id": {
-      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .id)"
-  },
-  "started_at": {
-      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .started_at)"
-  },
-  "name": {
-      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .name)"
-  },
-  "project_slug": {
-      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .project_slug)"
-  },
-  "status": {
-      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .status)"
-  },
-  "type": {
-      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .type)"
-  },
-  "stopped_at": {
-      "S": "$(cat jobs.json | jq -c "$jq_select" | jq -r .stopped_at)"
+[
+  {
+    "Dimensions": [
+      {
+        "Name": "job_number",
+        "Value": "$(cat jobs.json | jq -c "$jq_select" | jq -r .job_number)",
+        "DimensionValueType": "VARCHAR"
+      },
+      {
+        "Name": "id",
+        "Value": "$(cat jobs.json | jq -c "$jq_select" | jq -r .id)",
+        "DimensionValueType": "VARCHAR"
+      },
+      {
+        "Name": "started_at",
+        "Value": "$(cat jobs.json | jq -c "$jq_select" | jq -r .started_at)",
+        "DimensionValueType": "VARCHAR"
+      },
+      {
+        "Name": "name",
+        "Value": "$(cat jobs.json | jq -c "$jq_select" | jq -r .name)",
+        "DimensionValueType": "VARCHAR"
+      },
+      {
+        "Name": "project_slug",
+        "Value": "$(cat jobs.json | jq -c "$jq_select" | jq -r .project_slug)",
+        "DimensionValueType": "VARCHAR"
+      },
+      {
+        "Name": "type",
+        "Value": "$(cat jobs.json | jq -c "$jq_select" | jq -r .type)",
+        "DimensionValueType": "VARCHAR"
+      },
+      {
+        "Name": "stopped_at",
+        "Value": "$(cat jobs.json | jq -c "$jq_select" | jq -r .stopped_at)",
+        "DimensionValueType": "VARCHAR"
+      }
+    ],
+    "MeasureName": "deployment_result",
+    "MeasureValue": "$(cat jobs.json | jq -c "$jq_select" | jq -r .status)",
+    "MeasureValueType": "VARCHAR",
+    "Time": "$(date -d "$started_at" +"%s")",
+    "TimeUnit": "SECONDS",
+    "Version": 1
   }
-}
+]
 EOF
 )
 echo $Item
-echo $Item > deploy-result.json
 aws  timestream-write \
-     list-tables \
-     --database-name pipeline-metrics
+     write-records \
+     --database-name pipeline-metrics \
+     --table-name deployments \
+     --records "$Item"
