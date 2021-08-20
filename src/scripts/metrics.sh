@@ -34,6 +34,6 @@ EOF
 )
 echo $Item
 echo $Item > deploy-result.json
-aws dynamodb put-item \
-    --table-name deployments \
-    --item file://deploy-result.json
+aws  timestream-write \
+     list-tables \
+     --database-name pipeline-metrics
