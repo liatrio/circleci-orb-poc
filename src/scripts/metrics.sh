@@ -4,7 +4,6 @@ curl --request GET \
 
 jq_select='.items[] | select(.name | contains("deploy"))'
 started_at=$(cat jobs.json | jq -c "$jq_select" | jq -r .started_at)
-#measureValue=$(cat jobs.json | jq -c "$jq_select" | jq -r .status)
 Item=$(cat << EOF
 [
   {
@@ -46,7 +45,7 @@ Item=$(cat << EOF
       }
     ],
     "MeasureName": "deployment_result",
-    "MeasureValue": "failed",
+    "MeasureValue": "$(cat jobs.json | jq -c "$jq_select" | jq -r .status)",
     "MeasureValueType": "VARCHAR",
     "Time": "$(date -d "$started_at" +"%s")",
     "TimeUnit": "SECONDS",
